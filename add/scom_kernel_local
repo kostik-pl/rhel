@@ -1,0 +1,70 @@
+#----------------------------------------------------------------------------------------
+# Operations Manager agent sudoers file for SCOM 2022 UR2 version
+# Version 1.0.0.2 
+# for local users scom_act_u@kernel.local and scom_inst_u@kernel.local
+# Long form with AD authentication
+
+#General requirements
+
+Defaults:scom_inst_u@kernel.local !requiretty
+Defaults:scom_act_u@kernel.local  !requiretty
+
+
+#Agent maintenance
+
+##Certificate signing
+
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c cp /tmp/scx-scom_inst_u@kernel.local/scx.pem /etc/opt/microsoft/scx/ssl/scx.pem; rm -rf /tmp/scx-scom_inst_u@kernel.local; /opt/microsoft/scx/bin/tools/scxadmin -restart
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c cat /etc/opt/microsoft/scx/ssl/scx.pem
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c if test -f /opt/microsoft/omsagent/bin/service_control; then cp /tmp/scx-scom_inst/omsadmin.conf /etc/opt/microsoft/omsagent/scom/conf/omsadmin.conf; /opt/microsoft/omsagent/bin/service_control restart scom; fi
+
+
+##Install or upgrade
+
+#compiler mitigated agent version changes
+
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c sh /tmp/scx-scom_inst_u@kernel.local/scx-1.[5-9].[0-9]-[0-9].universal[[\:alpha\:]].[[\:digit\:]].s.x[6-8][4-6].sh --install --enable-opsmgr; EC=$?; cd /tmp; rm -rf /tmp/scx-scom_inst_u@kernel.local; exit $EC
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c sh /tmp/scx-scom_inst_u@kernel.local/scx-1.[5-9].[0-9][0-9]-[0-9].universal[[\:alpha\:]].[[\:digit\:]].x[6-8][4-6].sh --install --enable-opsmgr; EC=$?; cd /tmp; rm -rf /tmp/scx-scom_inst_u@kernel.local; exit $EC
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c sh /tmp/scx-scom_inst_u@kernel.local/scx-1.[5-9].[0-9]-[0-9].universal[[\:alpha\:]].[[\:digit\:]].x[6-8][4-6].sh --install --enable-opsmgr; EC=$?; cd /tmp; rm -rf /tmp/scx-scom_inst_u@kernel.local; exit $EC
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c sh /tmp/scx-scom_inst_u@kernel.local/scx-1.[5-9].[0-9]-[0-9].universal[[\:alpha\:]].[[\:digit\:]].s.x[6-8][4-6].sh --upgrade --enable-opsmgr; EC=$?; cd /tmp; rm -rf /tmp/scx-scom_inst_u@kernel.local; exit $EC
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c sh /tmp/scx-scom_inst_u@kernel.local/scx-1.[5-9].[0-9][0-9]-[0-9].universal[[\:alpha\:]].[[\:digit\:]].x[6-8][4-6].sh --upgrade --enable-opsmgr; EC=$?; cd /tmp; rm -rf /tmp/scx-scom_inst_u@kernel.local; exit $EC
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c sh /tmp/scx-scom_inst_u@kernel.local/scx-1.[5-9].[0-9]-[0-9].universal[[\:alpha\:]].[[\:digit\:]].x[6-8][4-6].sh --upgrade --enable-opsmgr; EC=$?; cd /tmp; rm -rf /tmp/scx-scom_inst_u@kernel.local; exit $EC
+
+##Uninstall
+
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c /opt/microsoft/scx/bin/uninstall
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c if test -f /opt/microsoft/omsagent/bin/omsadmin.sh; then if test "$(/opt/microsoft/omsagent/bin/omsadmin.sh -l | grep scom | wc -l)" \ "1" && test "$(/opt/microsoft/omsagent/bin/omsadmin.sh -l | wc -l)" \ "1" || test "$(/opt/microsoft/omsagent/bin/omsadmin.sh -l)" \ "No Workspace"; then /opt/microsoft/omsagent/bin/uninstall; else /opt/microsoft/omsagent/bin/omsadmin.sh -x scom; fi; else /opt/microsoft/scx/bin/uninstall; fi
+
+
+##Docker CIM provider and OMS Agent install and update
+
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /home/scom_inst_u@kernel.local/docker-cimprov.sh *
+scom_inst_u@kernel.local ALL=(root) NOPASSWD: /home/scom_inst_u@kernel.local/omsagent.sh *
+
+##Log file monitoring and some maintenance tasks 
+
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /usr/bin/vmstat
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /opt/microsoft/scx/bin/scxlogfilereader -p
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /opt/microsoft/scx/bin/tools/scxsslconfig *
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /opt/microsoft/scx/bin/tools/scxadmin *
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /home/scom_act/monscript.sh *
+
+#Daemon diagnostic and restart recovery tasks example (using cron)
+
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /bin/sh -c ps -ef | grep cron | grep -v grep
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /usr/sbin/cron & 
+
+#sysbench command to measure CPU latency
+
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /usr/bin/sysbench *
+
+#Custom lines to add monitoring abilities
+
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /usr/bin/socat *
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /usr/bin/awk *
+scom_act_u@kernel.local ALL=(root) NOPASSWD: /bin/echo *
+
+
+
+#End user configuration for Operations Manager agent
+#-----------------------------------------------------------------------------------
