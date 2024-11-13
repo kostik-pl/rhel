@@ -1,7 +1,7 @@
 FROM almalinux:8
 
 #Update from repository
-#RUN dnf update -y
+RUN dnf update -y
 
 #Add locales
 RUN dnf install -y glibc-langpack-uk glibc-langpack-ru

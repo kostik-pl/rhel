@@ -18,7 +18,7 @@ if [ ! -d "/_data/pg_data" ] ; then
 	mkdir /_data/pg_data
 fi
 chown -R postgres:postgres /_data/pg_backup
-chmod -R 700 /_data/pg_backup
+chmod -R 777 /_data/pg_backup
 chown -R postgres:postgres /_data/pg_data
 chmod -R 700 /_data/pg_data
 
