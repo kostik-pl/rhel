@@ -9,3 +9,6 @@ systemctl enable srv1cv8-8.3.25.1286@default
 systemctl enable ras-8.3.25.1286
 systemctl start srv1cv8-8.3.25.1286@default
 systemctl start ras-8.3.25.1286
+
+find /_data/httpd/conf/*.conf -type f | xargs sed -i 's/\/1cv8\/x86_64\/8.3.21.1302/\/1cv8\/x86_64\/8.3.25.1286/g'
+systemctl restart httpd
