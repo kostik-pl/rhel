@@ -25,10 +25,10 @@ chmod -R 700 /_data/pg_data
 #Start POSTGRESPRO container
 #Change the image name to the desired image. Example kostikpl/al_8:pgpro_1c_13 > kostikpl/al_9:pgpro_std_13
 echo 'Pull and setup container...'
-podman run --name pgpro --shm-size 2G -d -p 5432:5432 -v /_data:/_data docker.io/kostikpl/al_8:pgpro_std_13
+podman run --name pgpro --shm-size 2G -d -p 5432:5432 -v /_data:/_data docker.io/kostikpl/al_9:pgpro_std_13
 podman generate systemd --new --name pgpro > /etc/systemd/system/pgpro.service
 systemctl enable pgpro
-systemtcl start pgpro
+systemctl start pgpro
 firewall-cmd --permanent --zone=public --add-service=postgresql
 firewall-cmd --reload
 sleep 15s
