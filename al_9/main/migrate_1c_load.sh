@@ -39,7 +39,7 @@ then
     sed -ri 's/Environment=SRV1CV8_KEYTAB=\/opt\/1cv8\/x86_64\/'$new'\/usr1cv8.keytab/Environment=SRV1CV8_KEYTAB=\/_data\/usr1cv8.keytab/' /opt/1cv8/x86_64/$new/srv1cv8-$new@.service
 fi
 
-read -p 'Cgange & restart service 1c ? [Y/n]: ' -n 1 -r
+read -p 'Change & restart service 1c ? [Y/n]: ' -n 1 -r
 echo
 if [[ "$REPLY" =~ ^[yY]$ ]]
 then
