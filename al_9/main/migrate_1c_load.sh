@@ -22,11 +22,11 @@ then
     #Manual installation the process will run witout options
     ./$file_name --mode unattended --unattendedmodeui minimal --disable-components client_full,client_thin,client_thin_fib,config_storage_server,liberica_jre,integrity_monitoring --enable-components server,server_admin,ws,additional_admin_functions,v8_install_deps,uk,ru
 
-    if [ -f '/opt/1cv8/x86_64/$old/usr1cv8.keytab ' ]
+    if [ -f '/opt/1cv8/x86_64/'$old'/usr1cv8.keytab ' ]
     then 
-        yes | cp -v /opt/1cv8/x86_64/$old/usr1cv8.keytab /_data/usr1c8v.keytab
-        chown usr1cv8:grp1cv8 /_data/usr1c8v.keytab
-        chmod 644 /_data/usr1c8v.keytab
+        yes | cp -v '/opt/1cv8/x86_64/'$old'/usr1cv8.keytab' /_data/usr1cv8.keytab
+        chown usr1cv8:grp1cv8 /_data/usr1cv8.keytab
+        chmod 644 /_data/usr1cv8.keytab
     fi
 
     if grep -q 'Environment=SRV1CV8_DEBUG=-debug' /opt/1cv8/x86_64/$new/srv1cv8-$new@.service
