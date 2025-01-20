@@ -1,6 +1,7 @@
 #!/bin/bash
 #Version 1cv8 use only new install 
 old=8.3.21.1302
+#8.3.22.1750
 #8.3.25.1286
 new=8.3.25.1445
 #Google Drive files
@@ -18,7 +19,7 @@ chmod +x $file_name
 
 sed -ri 's/Environment=SRV1CV8_DEBUG=/Environment=SRV1CV8_DEBUG=-debug/' /opt/1cv8/x86_64/$new/srv1cv8-$new@.service
 sed -ri 's/Environment=SRV1CV8_DATA=\/home\/usr1cv8\/.1cv8\/1C\/1cv8/Environment=SRV1CV8_DATA=\/_data\/srv1c_inf_log/' /opt/1cv8/x86_64/$new/srv1cv8-$new@.service
-sed -ri 's/Environment=SRV1CV8_KEYTAB=\/opt\/1cv8\/x86_64\/8.3.25.1445\/usr1cv8.keytab/Environment=SRV1CV8_KEYTAB=\/_data\/usr1cv8.keytab/' /opt/1cv8/x86_64/$new/srv1cv8-$new@.service
+sed -ri 's/Environment=SRV1CV8_KEYTAB=\/opt\/1cv8\/x86_64\/'$new'\/usr1cv8.keytab/Environment=SRV1CV8_KEYTAB=\/_data\/usr1cv8.keytab/' /opt/1cv8/x86_64/$new/srv1cv8-$new@.service
 
 systemctl link /opt/1cv8/x86_64/$new/srv1cv8-$new@.service
 systemctl link /opt/1cv8/x86_64/$new/ras-$new.service
