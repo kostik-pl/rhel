@@ -1,4 +1,4 @@
-FROM almalinux:8
+FROM registry.access.redhat.com/ubi9/ubi:9.5
 
 #Update from repository
 RUN dnf update -y
@@ -12,14 +12,14 @@ ENV LANG=uk_UA.UTF-8
 ENV PGDATA=/_data/pg_data
 
 #Explicitly set user/group IDs and data dir
-RUN groupadd -r postgres --gid=9999 ; \
-    useradd -r -g postgres --uid=9999 postgres ; \
+RUN groupadd -r postgres --gid=980 ; \
+    useradd -r -g postgres --uid=980 postgres ; \
     mkdir -p $PGDATA ; \
     chown -R postgres:postgres $PGDATA ; \
-    chmod 700 $PGDATA ; \
+    chmod -R 700 $PGDATA ; \
     mkdir -p /_data/pg_backup ; \
     chown -R postgres:postgres /_data/pg_backup ; \
-    chmod 700 /_data/pg_backup
+    chmod 777 /_data/pg_backup
 
 #Disable the built-in PostgreSQL module
 RUN dnf -qy module disable postgresql
