@@ -11,7 +11,8 @@ if [ ! -d "/_data/srv1c_inf_log" ] ; then
 	mkdir /_data/srv1c_inf_log
 fi
 chown -R usr1cv8:grp1cv8 /_data/srv1c_inf_log
-chmod -R 755 /_data/srv1c_inf_log
+find /_data/srv1c_inf_log -type d -exec chmod 755 {} +
+find /_data/srv1c_inf_log -type f -exec chmod 644 {} +
 
 #Install 1C Enterprise requirements from STANDART repositories
 echo 'Dowload and install addons...'

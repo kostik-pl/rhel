@@ -18,9 +18,12 @@ if [ ! -d "/_data/pg_data" ] ; then
 	mkdir /_data/pg_data
 fi
 chown -R postgres:postgres /_data/pg_data
-chmod -R 700 /_data/pg_data
+find /_data/pg_data -type d -exec chmod 700 {} +
+find /_data/pg_data -type f -exec chmod 600 {} +
+
 chown -R postgres:postgres /_data/pg_backup
-chmod -R 777 /_data/pg_backup
+find /_data/pg_backup -type d -exec chmod 777 {} +
+find /_data/pg_backup -type f -exec chmod 666 {} +
 
 #Start POSTGRESPRO container
 #Change the image name to the desired image. Example kostikpl/al_8:pgpro_1c_13 > kostikpl/al_9:pgpro_std_13

@@ -11,7 +11,8 @@ if [ ! -d "/_data/srv1c_inf_log" ] ; then
 	mkdir /_data/srv1c_inf_log
 fi
 chown -R usr1cv8:grp1cv8 /_data/srv1c_inf_log
-chmod -R 755 /_data/srv1c_inf_log
+find /_data/srv1c_inf_log -type d -exec chmod 755 {} +
+find /_data/srv1c_inf_log -type f -exec chmod 644 {} +
 
 #Install 1C Enterprise requirements from STANDART repositories
 echo 'Dowload and install addons...'
@@ -23,7 +24,7 @@ dnf install -y epel-release
 dnf install -y ImageMagick
 
 #Install 1C Enterprise server requirements from FONTS packages
-dnf --enablerepo=ol9_distro_builder install xorg-x11-font-utils
+#dnf --enablerepo=ol9_distro_builder install xorg-x11-font-utils
 rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 #Previous version
 #curl "https://drive.usercontent.google.com/download?id=1-6UeVusRsqn33AAmAozG_NH-CmHDwKMx&confirm=xxx" -o msttcorefonts-2.5-1.noarch.rpm
@@ -32,7 +33,7 @@ fc-cache -fv
 
 #Install 1C Enterprise server packages from work dir
 #Download form GOOGLE
-curl "https://drive.usercontent.google.com/download?id=1ZsCOPrMJl5fU0r4tsEPE0C7tluO-i3zX&confirm=xxx" -o setup-full-8.3.25.1445-x86_64.run
+curl "https://drive.usercontent.google.com/download?id=1n_PTnHOY5_M__JxMzkfWrt3Z69UuZVae&confirm=xxx" -o setup-full-8.3.25.1445-x86_64.run
 chmod +x setup-full-8.3.25.1445-x86_64.run
 #ATTENTION! Batch installation will always install the 1c client and, if missing, the trimmed GNOME
 ./setup-full-8.3.25.1445-x86_64.run --mode unattended --unattendedmodeui minimal --disable-components client_full,client_thin,client_thin_fib,config_storage_server,liberica_jre,integrity_monitoring --enable-components server,server_admin,ws,additional_admin_functions,v8_install_deps,uk,ru
