@@ -2,8 +2,8 @@
 
 #Add 1c GROUP and USER
 echo 'Create 1c user and group...' 
-groupadd -r grp1cv8 --gid=991
-useradd -r -m -g grp1cv8 --uid=991 usr1cv8
+groupadd -r grp1cv8 --gid=9998
+useradd -r -m -g grp1cv8 --uid=9998 usr1cv8
 
 #Change access rights
 echo 'Create folder and set permision...'

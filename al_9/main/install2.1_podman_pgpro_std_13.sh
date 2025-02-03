@@ -6,8 +6,8 @@ dnf install -y podman
 
 #Add POSTGRES GROUP and USER same as in container
 echo 'Create postgres user and group...' 
-groupadd -r postgres --gid=990
-useradd -r -M -g postgres --uid=990 postgres
+groupadd -r postgres --gid=9999
+useradd -r -M -g postgres --uid=9999 postgres
 
 #Change access rights
 echo 'Create folder and set permision...'
