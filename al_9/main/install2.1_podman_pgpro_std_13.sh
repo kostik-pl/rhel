@@ -6,8 +6,8 @@ dnf install -y podman
 
 #Add POSTGRES GROUP and USER same as in container
 echo 'Create postgres user and group...' 
-groupadd -r postgres --gid=9999
-useradd -r -M -g postgres --uid=9999 postgres
+groupadd -r postgres --gid=990
+useradd -r -M -g postgres --uid=990 postgres
 
 #Change access rights
 echo 'Create folder and set permision...'
@@ -17,10 +17,10 @@ fi
 if [ ! -d "/_data/pg_data" ] ; then
 	mkdir /_data/pg_data
 fi
-chown -R postgres:postgres /_data/pg_backup
-chmod -R 777 /_data/pg_backup
 chown -R postgres:postgres /_data/pg_data
 chmod -R 700 /_data/pg_data
+chown -R postgres:postgres /_data/pg_backup
+chmod -R 777 /_data/pg_backup
 
 #Start POSTGRESPRO container
 #Change the image name to the desired image. Example kostikpl/al_8:pgpro_1c_13 > kostikpl/al_9:pgpro_std_13

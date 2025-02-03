@@ -1,1 +1,0 @@
-* 6 * * * root systemctl restart sssd > /dev/null 2>&1
