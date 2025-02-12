@@ -17,6 +17,8 @@ for conn in $(nmcli -t -f NAME connection show); do
 done
 firewall-cmd --permanent --zone=public --remove-service=dhcpv6-client
 
+#Change Podman storage
+sed -i "s|^graphroot = .*|graphroot = \_containers\"|" /etc/containers/storage.conf
 #Setup system
 dnf upgrade -y
 

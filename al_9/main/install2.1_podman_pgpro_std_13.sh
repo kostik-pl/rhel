@@ -28,7 +28,7 @@ find /_data/pg_backup -type f -exec chmod 666 {} +
 #Start POSTGRESPRO container
 #Change the image name to the desired image. Example kernelbranch/al_9:pgpro_std_13
 echo 'Pull and setup container...'
-podman run --name pgpro --shm-size 2G -d -p 5432:5432 -v /_data:/_data docker.io/kernelbranch/pgpro_std:pgpro-13.18.1_rhel-ubi-9.5
+podman run --userns=host --name pgpro --shm-size 2G -d -p 5432:5432 -v /_data:/_data docker.io/kernelbranch/pgpro_std:pgpro-13.18.1_al-9.5
 podman generate systemd --new --name pgpro > /etc/systemd/system/pgpro.service
 systemctl enable pgpro
 systemctl start pgpro
