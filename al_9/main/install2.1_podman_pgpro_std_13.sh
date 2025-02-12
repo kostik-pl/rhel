@@ -4,6 +4,10 @@ clear
 #Install PODMAN
 dnf install -y podman 
 
+#Change Podman storage
+sed -i "s|^graphroot = .*|graphroot = \_containers\"|" /etc/containers/storage.conf
+systemctl restart podman
+
 #Add POSTGRES GROUP and USER same as in container
 echo 'Create postgres user and group...' 
 groupadd -r postgres --gid=9999
