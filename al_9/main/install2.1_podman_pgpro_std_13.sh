@@ -5,7 +5,7 @@ clear
 dnf install -y podman 
 
 #Change Podman storage
-sed -i "s|^graphroot = .*|graphroot = \_containers\"|" /etc/containers/storage.conf
+sed -i 's/graphroot = "\/var\/lib\/containers\/storage"/graphroot = "\/_containers"/g' /etc/containers/storage.conf
 systemctl restart podman
 
 #Add POSTGRES GROUP and USER same as in container
