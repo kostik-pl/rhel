@@ -249,7 +249,7 @@ else #Disk with label [_storage] NO FOUND
 	esac
 fi
 
-#Adding disk [_containers]] from FSTAB
+#Adding disk [_containers] from FSTAB
 if [ ! -d '/_containers]' ] ; then
 	echo 'Make folder [/_containers]]...'
 	mkdir /_containers]
@@ -258,6 +258,7 @@ echo 'Change owner and permisions for [/_data]...'
 chown root:root /_containers
 chmod 755 /_containers]
 
+#Adding disk [_data] from FSTAB
 if [ ! -d '/_data' ] ; then
 	echo 'Make folder [/_data]...'
 	mkdir /_data
