@@ -21,7 +21,7 @@ firewall-cmd --permanent --zone=public --remove-service=dhcpv6-client
 dnf upgrade -y
 
 #To disable the GUI on boot
-systemctl set-default multi-user.target
+#systemctl set-default multi-user.target
 #To enable the GUI on boot
 #systemctl set-default graphical.target
 
