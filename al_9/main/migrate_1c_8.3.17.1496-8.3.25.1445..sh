@@ -24,12 +24,12 @@ systemctl enable ras-8.3.25.1445
 systemctl start srv1cv8-8.3.25.1445@default
 systemctl start ras-8.3.25.1445
 
-	if grep -q 'Environment=SRV1CV8_DEBUG=-debug' /opt/1cv8/x86_64/8.3.25.1445/srv1cv8-8.3.25.1445@.service
+    if grep -q 'Environment=SRV1CV8_DEBUG=-debug' /opt/1cv8/x86_64/8.3.25.1445/srv1cv8-8.3.25.1445@.service
     then
         echo 'DEBUG already ENABLED'
     else
         sed -ri 's/Environment=SRV1CV8_DEBUG=/Environment=SRV1CV8_DEBUG=-debug/' /opt/1cv8/x86_64/8.3.25.1445/srv1cv8-8.3.25.1445@.service
-	fi
+    fi
     sed -ri 's/Environment=SRV1CV8_DATA=\/home\/usr1cv8\/.1cv8\/1C\/1cv8/Environment=SRV1CV8_DATA=\/_data\/srv1c_inf_log/' /opt/1cv8/x86_64/8.3.25.1445/srv1cv8-8.3.25.1445@.service
     sed -ri 's/Environment=SRV1CV8_KEYTAB=\/opt\/1cv8\/x86_64\/'8.3.25.1445'\/usr1cv8.keytab/Environment=SRV1CV8_KEYTAB=\/_data\/usr1cv8.keytab/' /opt/1cv8/x86_64/8.3.25.1445/srv1cv8-8.3.25.1445@.service
 fi
