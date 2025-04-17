@@ -48,7 +48,7 @@ then
     systemctl start srv1cv8-8.3.25.1445@default
     systemctl start ras-8.3.25.1445
 
-    sed -ri 's/'$old'/'8.3.25.1445'/' /_data/httpd/conf/extra/httpd-1C-pub.conf
-    sed -ri 's/'$old'/'8.3.25.1445'/' /_data/httpd/conf/extra/httpd-1C-pub-unauth.conf
-    systemctl restart httpd
+#    sed -ri 's/'$old'/'8.3.25.1445'/' /_data/httpd/conf/extra/httpd-1C-pub.conf
+#    sed -ri 's/'$old'/'8.3.25.1445'/' /_data/httpd/conf/extra/httpd-1C-pub-unauth.conf
+#    systemctl restart httpd
 fi
