@@ -6,7 +6,7 @@ RUN dnf update -y
 #Add locales
 RUN dnf install -y glibc-langpack-uk glibc-langpack-ru
 #Set locales
-ENV LANG=uk_UA.UTF-8
+ENV LANG=ru_RU.UTF-8
 
 #Set POSTGRES variables
 ENV PGDATA=/_data/pg_data

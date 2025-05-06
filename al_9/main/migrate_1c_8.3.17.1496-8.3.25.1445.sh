@@ -52,3 +52,7 @@ then
 #    sed -ri 's/'$old'/'8.3.25.1445'/' /_data/httpd/conf/extra/httpd-1C-pub-unauth.conf
 #    systemctl restart httpd
 fi
+sudo ln -s /opt/1cv8/x86_64/8.3.25.1445/srv1cv8-8.3.25.1445@.service /etc/systemd/system/srv1cv8-8.3.25.1445@.service
+sudo systemctl daemon-reload
+sudo systemctl enable instance1.service
+sudo systemctl start instance1.service
