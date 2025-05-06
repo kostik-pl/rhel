@@ -27,22 +27,21 @@ RUN dnf -qy module disable postgresql
 #Install WGET
 RUN dnf install -y wget
 
-#Install the repository PosrgesPRO-STD-13
-#RUN curl -o /opt/pgpro-repo-add.sh https://repo.postgrespro.ru/std/std-13/keys/pgpro-repo-add.sh
+#Install the repository PosrgesPRO-1c-13
 RUN curl -o /opt/pgpro-repo-add.sh https://repo.postgrespro.ru/1c/1c-13/keys/pgpro-repo-add.sh
 RUN chmod +x /opt/pgpro-repo-add.sh
 RUN /opt/pgpro-repo-add.sh
-RUN dnf install -y postgrespro-std-13-server postgrespro-std-13-contrib
+RUN dnf install -y postgrespro-1c-13-server postgrespro-1c-13-contrib
 RUN dnf clean all
 
 #Change settings
-RUN sed -ri "s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" /opt/pgpro/std-13/share/postgresql.conf.sample ; \
-    sed -ri "s!^#?(logging_collector)\s*=\s*\S+.*!\1 = on!" /opt/pgpro/std-13/share/postgresql.conf.sample ; \
-    sed -ri "s!^#?(log_directory)\s*=\s*\S+.*!\1 = 'log'!" /opt/pgpro/std-13/share/postgresql.conf.sample ; \
-    sed -ri "s!^#?(lc_messages)\s*=\s*\S+.*!\1 = 'C.UTF-8'!" /opt/pgpro/std-13/share/postgresql.conf.sample
+RUN sed -ri "s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" /opt/pgpro/1c-13/share/postgresql.conf.sample ; \
+    sed -ri "s!^#?(logging_collector)\s*=\s*\S+.*!\1 = on!" /opt/pgpro/1c-13/share/postgresql.conf.sample ; \
+    sed -ri "s!^#?(log_directory)\s*=\s*\S+.*!\1 = 'log'!" /opt/pgpro/1c-13/share/postgresql.conf.sample ; \
+    sed -ri "s!^#?(lc_messages)\s*=\s*\S+.*!\1 = 'C.UTF-8'!" /opt/pgpro/1c-13/share/postgresql.conf.sample
 
 #Setup for start
-ENV PATH $PATH:/opt/pgpro/std-13/bin
+ENV PATH $PATH:/opt/pgpro/1c-13/bin
 COPY container-entrypoint.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/container-entrypoint.sh
 
