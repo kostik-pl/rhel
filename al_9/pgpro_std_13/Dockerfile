@@ -28,7 +28,8 @@ RUN dnf -qy module disable postgresql
 RUN dnf install -y wget
 
 #Install the repository PosrgesPRO-STD-13
-RUN curl -o /opt/pgpro-repo-add.sh https://repo.postgrespro.ru/std/std-13/keys/pgpro-repo-add.sh
+#RUN curl -o /opt/pgpro-repo-add.sh https://repo.postgrespro.ru/std/std-13/keys/pgpro-repo-add.sh
+RUN curl -o /opt/pgpro-repo-add.sh https://repo.postgrespro.ru/1c/1c-13/keys/pgpro-repo-add.sh
 RUN chmod +x /opt/pgpro-repo-add.sh
 RUN /opt/pgpro-repo-add.sh
 RUN dnf install -y postgrespro-std-13-server postgrespro-std-13-contrib
