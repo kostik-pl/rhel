@@ -10,11 +10,18 @@ sed -i "s/active = yes/active = no/" /etc/audit/plugins.d/sedispatch.conf
 
 #Disable IP6 in GRUB or SYSTEM_CONFIG
 grubby --update-kernel=ALL --args="ipv6.disable=1"
+
+#Disable IPv6 for all interfaces except loopback
 for conn in $(nmcli -t -f NAME connection show); do
-	nmcli connection modify "$conn" ipv6.method "disabled"
-	nmcli connection down "$conn"
-	nmcli connection up "$conn"
+    if [[ "$conn" == "lo" ]]; then
+        echo "Skip \"lo\" interface"
+        continue
+    fi
+    nmcli connection modify "$conn" ipv6.method "disabled"
+    nmcli connection down "$conn"
+    nmcli connection up "$conn"
 done
+
 firewall-cmd --permanent --zone=public --remove-service=dhcpv6-client
 
 #Setup system
