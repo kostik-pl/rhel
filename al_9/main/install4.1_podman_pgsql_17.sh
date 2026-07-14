@@ -34,3 +34,5 @@ systemctl start pgsql
 firewall-cmd --permanent --zone=public --add-port=15432/tcp
 firewall-cmd --reload
 sleep 15s
+podman exec -ti pgsql psql -c "CREATE ROLE svc_airflow_prod WITH LOGIN SUPERUSER PASSWORD 'airflow-prod@pass#';"
+podman exec -ti pgsql psql -c "CREATE DATABASE pg_etl_dwh OWNER svc_airflow_prod;"
