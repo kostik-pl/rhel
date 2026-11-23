@@ -27,10 +27,11 @@ dnf install -y ImageMagick
 dnf install -y almalinux-release-devel
 dnf install -y cabextract
 dnf install -y xorg-x11-font-utils
-rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+#New version - NEED INTERNET!
+#rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 #Previous version
-#curl "https://drive.usercontent.google.com/download?id=1-6UeVusRsqn33AAmAozG_NH-CmHDwKMx&confirm=xxx" -o msttcorefonts-2.5-1.noarch.rpm
-#rpm -ivh msttcorefonts-2.5-1.noarch.rpm
+curl "https://drive.usercontent.google.com/download?id=1-6UeVusRsqn33AAmAozG_NH-CmHDwKMx&confirm=xxx" -o msttcorefonts-2.5-1.noarch.rpm
+rpm -ivh msttcorefonts-2.5-1.noarch.rpm
 fc-cache -fv
 
 #Install 1C Enterprise server packages from work dir
