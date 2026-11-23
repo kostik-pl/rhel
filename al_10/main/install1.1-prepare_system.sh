@@ -7,6 +7,7 @@ find /etc/yum.repos.d/ -type f -name 'almalinux*' -exec sed -i 's/# baseurl/base
 #Disable selinux
 sed -i 's/enforcing/disabled/g' /etc/selinux/config
 sed -i "s/active = yes/active = no/" /etc/audit/plugins.d/sedispatch.conf
+grubby --update-kernel=ALL --args="selinux=0"
 
 #Disable IP6 in GRUB or SYSTEM_CONFIG
 grubby --update-kernel=ALL --args="ipv6.disable=1"
