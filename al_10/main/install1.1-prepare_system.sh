@@ -24,6 +24,13 @@ done
 
 firewall-cmd --permanent --zone=public --remove-service=dhcpv6-client
 
+# Setup timezone for Ukraine
+timedatectl set-timezone Europe/Kiev
+
+# Set Ukrainian formats for dates, time, and numbers without changing system UI language
+dnf install -y glibc-langpack-uk glibc-langpack-ru
+localectl set-locale LC_TIME=uk_UA.UTF-8 LC_NUMERIC=uk_UA.UTF-8 LC_MONETARY=uk_UA.UTF-8 LC_MEASUREMENT=uk_UA.UTF-8
+
 #Setup system
 dnf upgrade -y
 

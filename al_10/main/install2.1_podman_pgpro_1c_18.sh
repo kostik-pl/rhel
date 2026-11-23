@@ -41,5 +41,9 @@ firewall-cmd --reload
 sleep 15s
 PG_PASSWD='RheujvDhfub72'
 podman exec -ti pgpro psql -c "ALTER USER postgres WITH PASSWORD '$PG_PASSWD';"
-#srv1c_PASSWD = '\$GitybwZ - ZxvtyM\$' # $GitybwZ - ZxvtyM$
-#podman exec -ti pgpro psql -c "ALTER USER srv1c WITH PASSWORD '$srv1c_PASSWD';"
+srv1c_PASSWD='$GitybwZ - ZxvtyM$'
+if podman exec pgpro psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='srv1c'" | grep -q 1; then
+  podman exec -ti pgpro psql -c "ALTER USER srv1c WITH LOGIN SUPERUSER PASSWORD '$srv1c_PASSWD';"
+else
+  podman exec -ti pgpro psql -c "CREATE USER srv1c WITH LOGIN SUPERUSER PASSWORD '$srv1c_PASSWD';"
+fi
