@@ -35,11 +35,6 @@ localectl set-locale LC_TIME=uk_UA.UTF-8 LC_NUMERIC=uk_UA.UTF-8 LC_MONETARY=uk_U
 #Setup system
 dnf upgrade -y
 
-#To disable the GUI on boot
-systemctl set-default multi-user.target
-#To enable the GUI on boot
-#systemctl set-default graphical.target
-
 #Install cockpit and related pcp (performance co-pilot)
 dnf install -y pcp pcp-system-tools pcp-gui
 systemctl enable --now pmcd pmlogger
@@ -52,6 +47,11 @@ systemctl enable cockpit.socket
 #Install mc
 dnf install -y mc
 dnf install -y cifs-utils
+
+#To disable the GUI on boot
+systemctl set-default multi-user.target
+#To enable the GUI on boot
+#systemctl set-default graphical.target
 
 #Reboot
 reboot
